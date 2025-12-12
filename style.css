@@ -1,0 +1,481 @@
+/* ==========================
+   VARIÁVEIS DE CORES
+   ========================== */
+:root {
+  --black: #1A1A1A;
+  --gold: #808080;
+  --white: #FFFFFF;
+  --offwhite: #f8f8f8;
+  --gray: #707070;
+  --shadow: 0 8px 24px rgba(0,0,0,.12);
+  --radius: 16px;
+  --transition: 0.3s ease;
+}
+
+/* ==========================
+   RESET E BASE
+   ========================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+
+body {
+  background: var(--offwhite);
+  color: var(--black);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+  border-radius: var(--radius);
+}
+
+/* ==========================
+   HEADER
+   ========================== */
+header.header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background: rgba(255,255,255,0.9);
+  backdrop-filter: blur(10px);
+  z-index: 100;
+  box-shadow: 0 4px 16px rgba(0,0,0,.08);
+}
+
+header .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 18px 6%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--black);
+}
+
+header nav a {
+  margin: 0 16px;
+  text-decoration: none;
+  font-weight: 500;
+  color: var(--black);
+  transition: var(--transition);
+}
+
+header nav a:hover {
+  color: var(--gold);
+}
+
+.btn-primary {
+  background: var(--gold);
+  color: var(--white);
+  padding: 12px 28px;
+  border-radius: var(--radius);
+  font-weight: 600;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  background: #000 !important;
+  color: #FFF !important;
+}
+
+/* ==========================
+   HERO
+   ========================== */
+.hero {
+  position: relative;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: url('https://cdn.pixabay.com/photo/2020/07/17/07/54/interior-5413351_1280.jpg') no-repeat center center/cover;
+}
+
+.hero .overlay {
+  position: absolute;
+  top:0; left:0; right:0; bottom:0;
+  background: rgba(0,0,0,0.35);
+}
+
+.hero-content {
+  position: relative;
+  color: var(--white);
+  max-width: 900px;
+  padding: 0 20px;
+}
+
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  line-height: 1.2;
+  animation: fadeUp 1s ease forwards;
+}
+
+.hero-sub {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  margin-bottom: 30px;
+  animation: fadeUp 1.2s ease forwards;
+}
+
+/* ==========================
+   SEÇÕES
+   ========================== */
+.section {
+  padding: 60px 6%;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  text-align: center;
+  color: var(--black);
+  margin-bottom: 40px;
+}
+
+.section-text {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 40px;
+  font-size: 1.1rem;
+  color: var(--black);
+  opacity: 0.9;
+  line-height: 1.8;
+}
+
+/* ==========================
+   PLANOS
+   ========================== */
+.plans {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 30px;
+}
+
+.plan {
+  background: var(--white);
+  box-shadow: var(--shadow);
+  border-radius: var(--radius);
+  padding: 24px;
+  text-align: center;
+  transition: var(--transition);
+}
+
+.plan:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(0,0,0,.15);
+}
+
+.plan h3 {
+  font-size: 1.4rem;
+  margin-bottom: 12px;
+}
+
+.plan p {
+  font-size: 1rem;
+  color: var(--gray);
+  margin-bottom: 16px;
+}
+
+.btn-plan {
+  display: inline-block;
+  background: var(--gold);
+  color: var(--white);
+  padding: 10px 24px;
+  border-radius: var(--radius);
+  font-weight: 600;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.btn-plan:hover {
+  background: #000 !important;
+  color: #FFF !important;
+  transform: translateY(-2px);
+}
+
+/* ==========================
+   SERVIÇOS
+   ========================== */
+.marquee {
+  overflow: hidden;
+  white-space: nowrap;
+  margin: 40px 0px 10px 0;
+}
+
+.services {
+  display: inline-flex;
+  gap: 30px;
+  animation: slideMarquee 40s linear infinite;
+}
+
+.services:hover {
+  animation-play-state: paused;
+}
+
+.service {
+  background: var(--black);
+  color: var(--white);
+  padding: 14px 28px;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: var(--transition);
+  /* Animação de cores de cabelo */
+    animation: hairColors 10s infinite alternate;
+}
+
+
+/* Keyframes para cores de cabelo */
+@keyframes hairColors {
+  0%   { background-color: #000000; }  /* Preto */
+
+  100%  { background-color: #808080; }  /* Cinza */
+}
+
+.service:hover {
+  transform: translateY(-5px) scale(1.05);
+}
+
+/* ==========================
+   SOBRE
+   ========================== */
+.card-info {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.card-info p {
+  margin-bottom: 12px;
+  font-size: 1.1rem;
+}
+
+/* ==========================
+   MAPA
+   ========================== */
+
+p.small-info {
+    text-align: center;
+    margin: 10px 0;
+    font-size: 15px;
+}
+
+.map-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.map-container iframe {
+  width: 100%;
+  height: 400px;
+  border: none;
+}
+
+/* ==========================
+   FOOTER
+   ========================== */
+footer {
+  background: var(--black);
+  color: var(--white);
+  text-align: center;
+  padding: 8px 6%;;
+}
+
+p.footer {
+    font-size: 11px;
+    font-weight: 100;
+}
+
+/* TESTE */
+/* ==========================
+   AVALIAÇÕES
+   ========================== */
+   
+.reviews-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  overflow: hidden;
+  position: relative;
+  padding: 6px;
+}
+
+.reviews {
+  display: flex;
+  gap: 30px;
+  transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+}
+
+.review {
+  background: var(--white);
+  padding: 20px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  flex: 0 0 calc(33.333% - 20px);
+  text-align: center;
+  opacity: 1;
+  transition: opacity 0.8s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.review:hover {
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0 12px 28px rgba(0,0,0,.15);
+}
+
+.review p {
+  font-size: 1rem;
+  color: var(--black);
+  margin-bottom: 10px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.stars {
+  color: #FFD700; /* Dourado para estrelas */
+  margin-bottom: 12px;
+  font-size: 1.2rem;
+}
+
+/* RESPONSIVO */
+@media(max-width: 1024px) {
+  .review {
+    flex: 0 0 calc(50% - 20px);
+  }
+}
+
+@media(max-width: 768px) {
+  .review {
+    flex: 0 0 100%;
+  }
+}
+
+
+/* ==========================
+   COMODIDADES
+   ========================== */
+.amenities {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 40px 0;
+  justify-items: center;
+  margin-top: 80px;
+}
+
+.amenity {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--black);
+  font-size: 1rem;
+  text-align: center;
+  transition: var(--transition);
+}
+
+.amenity i {
+  margin-bottom: 8px;
+  color: #504949;
+}
+
+.amenity span {
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+/* Responsivo */
+@media(max-width: 1024px){
+  .amenities {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
+}
+
+@media(max-width: 768px){
+  .amenities {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+/* FIM TESTE */
+
+/* ==========================
+   WHATSAPP
+   ========================== */
+.whatsapp-btn {
+  position: fixed;
+  right: 25px;
+  bottom: 25px;
+  width: 60px;
+  height: 60px;
+  background: #25d366;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #25d366;
+  font-size: 1.8rem;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  z-index: 1000;
+}
+
+.whatsapp-btn:hover {
+  transform: scale(1.08);
+}
+
+/* ==========================
+   ANIMAÇÕES
+   ========================== */
+@keyframes fadeUp {
+  0% { opacity: 0; transform: translateY(20px);}
+  100% { opacity: 1; transform: translateY(0);}
+}
+
+@keyframes slideMarquee {
+  0% { transform: translateX(0);}
+  100% { transform: translateX(-50%);}
+}
+
+/* ==========================
+   RESPONSIVO
+   ========================== */
+@media(max-width: 1024px){
+  .hero-title { font-size: 2.6rem; }
+  .section-title { font-size: 2rem; }
+}
+
+@media(max-width: 768px){
+  header nav { display: none; }
+  .hero-title { font-size: 2rem; }
+  .hero-sub { font-size: 1rem; }
+  .btn-primary { padding: 10px 24px; }
+  .plans { grid-template-columns: 1fr; gap: 24px; }
+}
+
+@media(max-width: 480px){
+  .hero-title { font-size: 1.6rem; }
+  .section-title { font-size: 1.6rem; }
+  .plan h3 { font-size: 1.2rem; }
+  .plan p { font-size: 0.95rem; }
+  .service { padding: 12px 20px; font-size: 0.9rem; }
+}
