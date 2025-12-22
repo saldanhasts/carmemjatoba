@@ -105,6 +105,13 @@ header nav a:hover {
   background: url('https://images.pexels.com/photos/3993472/pexels-photo-3993472.jpeg?auto=compress&cs=tinysrgb&w=1600&fit=crop') no-repeat center center/cover;
 }
 
+@media (max-width: 768px) {
+  .hero {
+    background-size: 250%;
+    background-position: center;
+  }
+}
+
 .hero .overlay {
   position: absolute;
   top:0; left:0; right:0; bottom:0;
