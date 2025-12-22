@@ -102,14 +102,7 @@ header nav a:hover {
   align-items: center;
   justify-content: center;
   text-align: center;
-  background: url('https://images.pexels.com/photos/3993472/pexels-photo-3993472.jpeg?auto=compress&cs=tinysrgb&w=1600&fit=crop') no-repeat center center/cover;
-}
-
-@media (max-width: 768px) {
-  .hero {
-    background-size: 250%;
-    background-position: center;
-  }
+  background: url('https://cdn.pixabay.com/photo/2020/07/17/07/54/interior-5413351_1280.jpg') no-repeat center center/cover;
 }
 
 .hero .overlay {
