@@ -1,21 +1,34 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Smooth scroll
+
+  /* =========================
+     SMOOTH SCROLL
+  ========================= */
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
       e.preventDefault();
-      const el = document.querySelector(this.getAttribute('href'));
-      el && el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
     });
   });
 
-  // Marquee duplicado para infinito
+  /* =========================
+     MARQUEE INFINITO
+  ========================= */
   const services = document.querySelector('.services');
-  if (services) services.innerHTML += services.innerHTML;
+  if (services) {
+    services.innerHTML += services.innerHTML;
+  }
 
-  // Planos: abre WhatsApp com mensagem personalizada
+  /* =========================
+     PLANOS → WHATSAPP
+  ========================= */
   const phone = '5531973318300';
-  const btns = document.querySelectorAll('.btn-plan');
-  btns.forEach(btn => {
+  document.querySelectorAll('.btn-plan').forEach(btn => {
     btn.addEventListener('click', () => {
       const plan = btn.dataset.plan;
       const msg = encodeURIComponent(`Olá! Quero assinar o ${plan}.`);
@@ -23,25 +36,61 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Ano do footer atualizado automaticamente
-  document.getElementById('year').textContent = new Date().getFullYear();
-});
-
-// Alternar avaliações de 3 em 3
-document.addEventListener('DOMContentLoaded', () => {
+  /* =========================
+     CARROSSEL DE AVALIAÇÕES
+  ========================= */
   const reviewsContainer = document.querySelector('.reviews');
-  if (!reviewsContainer) return;
+  if (reviewsContainer) {
+    const reviews = Array.from(reviewsContainer.children);
+    const gap = 30;
+    const itemWidth = reviews[0].offsetWidth + gap;
 
-  const reviews = document.querySelectorAll('.review');
-  const total = reviews.length;
-  let index = 0;
+    reviews.forEach(review => {
+      reviewsContainer.appendChild(review.cloneNode(true));
+    });
 
-  function showNext() {
-    index += 3;
-    if (index >= total) index = 0;
-    const offset = -index * (reviews[0].offsetWidth + 30); // largura + gap
-    reviewsContainer.style.transform = `translateX(${offset}px)`;
+    let index = 0;
+
+    setInterval(() => {
+      index++;
+      reviewsContainer.style.transition = 'transform 0.8s ease';
+      reviewsContainer.style.transform = `translateX(-${index * itemWidth}px)`;
+
+      if (index === reviews.length) {
+        setTimeout(() => {
+          reviewsContainer.style.transition = 'none';
+          reviewsContainer.style.transform = 'translateX(0)';
+          index = 0;
+        }, 800);
+      }
+    }, 2500);
   }
 
-  setInterval(showNext, 4000); // troca a cada 4s
+  /* =========================
+     MENU ATIVO POR SEÇÃO (CORRETO)
+  ========================= */
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('header nav a');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute('id');
+
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === `#${id}`) {
+            link.classList.add('active');
+          }
+        });
+      }
+    });
+  }, {
+    root: null,
+    rootMargin: '-140px 0px -50% 0px', // compensa header sticky
+    threshold: 0
+  });
+
+  sections.forEach(section => observer.observe(section));
+
 });

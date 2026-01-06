@@ -3,7 +3,7 @@
    ========================== */
 :root {
   --black: #1A1A1A;
-  --gold: #808080;
+  --gold: #000;
   --white: #FFFFFF;
   --offwhite: #f8f8f8;
   --gray: #707070;
@@ -51,17 +51,40 @@ header.header {
 header .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 18px 6%;
+  /*padding: 18px 6%;*/
+  padding: 10px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.logo {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.8rem;
+/* Menu ativo conforme seção visível */
+header nav a {
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+header nav a.active {
+  color: var(--gray);
   font-weight: 600;
-  color: var(--black);
+}
+
+header nav a.active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 2px;
+  background: var(--black);
+  border-radius: 2px;
+}
+
+
+.logo img {
+  max-width: 110px;
+  height: auto;
+  display: block;
 }
 
 header nav a {
@@ -73,22 +96,48 @@ header nav a {
 }
 
 header nav a:hover {
-  color: var(--gold);
+  color: var(--gray);
 }
 
 .btn-primary {
-  background: var(--gold);
+  background:  var(--black);
   color: var(--white);
   padding: 12px 28px;
   border-radius: var(--radius);
   font-weight: 600;
   text-decoration: none;
   transition: var(--transition);
+  display: inline-block;
+  animation: pulse 5s infinite;
+  position: relative;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.0);
+  }
+
+  /* Pulso acontece rapidamente */
+  4% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 6px rgba(0, 0, 0, 0.08);
+  }
+
+  8% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  }
+
+  /* Fica parado até completar os 5s */
+  100% {
+    transform: scale(1);
+  }
 }
 
 .btn-primary:hover {
   transform: translateY(-3px);
-  background: #000 !important;
+  background: var(--gray) !important;
   color: #FFF !important;
 }
 
@@ -97,12 +146,13 @@ header nav a:hover {
    ========================== */
 .hero {
   position: relative;
-  min-height: 80vh;
+  min-height: 70vh;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  background: url('https://cdn.pixabay.com/photo/2020/07/17/07/54/interior-5413351_1280.jpg') no-repeat center center/cover;
+  background: url('capa-zoom-out.jpeg') no-repeat center center/cover;
+  border-radius: 0% 0% 15% 15%;
 }
 
 .hero .overlay {
@@ -139,6 +189,7 @@ header nav a:hover {
    ========================== */
 .section {
   padding: 60px 6%;
+  scroll-margin-top: 140px; /* um pouco maior que o header */
 }
 
 .section-title {
@@ -205,10 +256,111 @@ header nav a:hover {
 }
 
 .btn-plan:hover {
-  background: #000 !important;
+  background:  var(--gray) !important;
   color: #FFF !important;
   transform: translateY(-2px);
 }
+
+/* ==========================
+   ABOUT HER
+   ========================== */
+
+
+.about-wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 40px 1.4fr;
+  align-items: center;
+  gap: 40px;
+  padding-top: 40px;
+}
+
+/* FOTO */
+.about-photo img {
+  width: 100%;
+  max-width: 320px;
+  border-radius: 40% 0%;
+  box-shadow: 0 18px 30px rgba(0,0,0,0.25);
+  filter: drop-shadow(0 20px 30px rgba(0,0,0,.35));
+}
+
+@media (max-width: 768px) {
+  .about-wrapper {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding-top: 20px;
+  }
+
+  .about-photo img {
+    max-width: 260px;
+    width: 100%;
+    filter: drop-shadow(0 18px 26px rgba(0,0,0,.35));
+}
+
+  .about-text p {
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+}
+@media (max-width: 430px) {
+  .about-photo img {
+    max-width: 220px;
+    filter: drop-shadow(0 18px 26px rgba(0,0,0,.35));
+  }
+
+  .section-title {
+    font-size: 1.6rem;
+  }
+}
+
+
+/* DIVISOR */
+.about-divider {
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--black),
+    transparent
+  );
+  border-radius: 4px;
+}
+
+/* TEXTO */
+.about-text p {
+  font-size: 1.1rem;
+  line-height: 1.9;
+  margin-bottom: 18px;
+  color: var(--black);
+}
+
+/* ==========================
+   RESPONSIVO
+   ========================== */
+
+@media (max-width: 900px) {
+  .about-wrapper {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .about-divider {
+    display: none;
+  }
+
+  .about-photo {
+    display: flex;
+    justify-content: center;
+  }
+
+  .about-text {
+    text-align: center;
+  }
+}
+
+
 
 /* ==========================
    SERVIÇOS
@@ -250,7 +402,7 @@ header nav a:hover {
 }
 
 .service:hover {
-  transform: translateY(-5px) scale(1.05);
+  transform: translateY(-2px) scale(1.00);
 }
 
 /* ==========================
