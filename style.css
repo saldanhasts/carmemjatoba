@@ -146,14 +146,32 @@ header nav a:hover {
    ========================== */
 .hero {
   position: relative;
-  min-height: 70vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  background: url('capa-zoom-out.jpeg') no-repeat center center/cover;
+  width: 100%;
+  height: 75vh; /* desktop */
+  overflow: hidden;
   border-radius: 0% 0% 15% 15%;
 }
+
+
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+
+@media (max-width: 768px) {
+  .hero {
+    height: auto;
+  }
+
+  .hero-img {
+    height: auto;
+    max-height: 70svh;
+  }
+}
+
 
 .hero .overlay {
   position: absolute;
@@ -353,6 +371,7 @@ header nav a:hover {
   .about-photo {
     display: flex;
     justify-content: center;
+    margin-bottom: 25px;
   }
 
   .about-text {
@@ -419,6 +438,84 @@ header nav a:hover {
   font-size: 1.1rem;
 }
 
+.atendimento {
+  background: var(--white);
+}
+
+.atendimento-wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.atendimento-text {
+  font-size: 1.1rem;
+  color: var(--gray);
+  line-height: 1.8;
+  margin-bottom: 32px;
+}
+
+/* Horários */
+.horarios {
+  display: grid;
+  gap: 14px;
+  margin-bottom: 36px;
+}
+
+.horarios div {
+  display: flex;
+  justify-content: space-between;
+  padding: 14px 18px;
+  background: var(--offwhite);
+  border-radius: var(--radius);
+  font-size: 1rem;
+}
+
+.horarios .fechado {
+  opacity: 0.6;
+}
+
+/* Destaque lateral */
+.atendimento-highlight {
+  background: var(--black);
+  color: var(--white);
+  border-radius: var(--radius);
+  padding: 50px 40px;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+
+.atendimento-highlight i {
+  font-size: 2.4rem;
+  margin-bottom: 20px;
+}
+
+.atendimento-highlight p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+/* Responsivo */
+@media (max-width: 900px) {
+  .atendimento-wrapper {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    text-align: center;
+  }
+
+  .section-title.left {
+    text-align: center;
+  }
+
+  .horarios div {
+    flex-direction: column;
+    gap: 6px;
+  }
+}
+
 /* ==========================
    MAPA
    ========================== */
@@ -458,7 +555,7 @@ p.footer {
     font-weight: 100;
 }
 
-/* TESTE */
+
 /* ==========================
    AVALIAÇÕES
    ========================== */
@@ -508,16 +605,23 @@ p.footer {
   font-size: 1.2rem;
 }
 
-/* RESPONSIVO */
-@media(max-width: 1024px) {
-  .review {
-    flex: 0 0 calc(50% - 20px);
-  }
-}
+/* ==========================
+   AVALIAÇÕES – MOBILE FIX
+========================== */
 
-@media(max-width: 768px) {
+@media (max-width: 768px) {
+  .reviews {
+    gap: 0;
+  }
+
   .review {
     flex: 0 0 100%;
+    width: 100%;
+    margin: 0;
+  }
+
+  .reviews-container {
+    padding: 0;
   }
 }
 
@@ -552,6 +656,129 @@ p.footer {
   font-weight: 500;
   line-height: 1.4;
 }
+
+/* ==========================
+   INSTAGRAM EXPERIENCE
+========================== */
+
+.instagram-experience {
+  position: relative;
+  background: radial-gradient(
+    circle at top,
+    #2a2a2a,
+    #000
+  );
+  color: #fff;
+  padding: 60px 6%;
+  overflow: hidden;
+}
+
+/* brilho animado */
+.insta-glow {
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(
+    circle,
+    rgba(255,255,255,0.12),
+    transparent 70%
+  );
+  top: -120px;
+  right: -120px;
+  animation: floatGlow 8s ease-in-out infinite alternate;
+}
+
+@keyframes floatGlow {
+  from { transform: translateY(0); }
+  to   { transform: translateY(40px); }
+}
+
+/* conteúdo */
+.insta-content {
+  max-width: 720px;
+  position: relative;
+  z-index: 2;
+}
+
+.insta-eyebrow {
+  display: inline-block;
+  font-size: 0.75rem;
+  letter-spacing: 4px;
+  opacity: 0.6;
+  margin-bottom: 18px;
+  text-transform: uppercase;
+}
+
+.insta-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.2rem;
+  line-height: 1.1;
+  margin-bottom: 26px;
+}
+
+.insta-desc {
+  font-size: 1.1rem;
+  max-width: 520px;
+  opacity: 0.85;
+  line-height: 1.8;
+  margin-bottom: 50px;
+}
+
+/* CTA criativo */
+.insta-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 34px;
+  border-radius: 60px;
+  background: linear-gradient(
+    135deg,
+    #833ab4,
+    #fd1d1d,
+    #fcb045
+  );
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.05rem;
+  transition: transform .3s ease, box-shadow .3s ease;
+  box-shadow: 0 18px 40px rgba(0,0,0,.4);
+}
+
+.insta-cta i {
+  font-size: 1.3rem;
+}
+
+.insta-cta:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 24px 50px rgba(0,0,0,.6);
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .instagram-experience {
+    padding: 100px 6%;
+  }
+
+  .insta-title {
+    font-size: 2.3rem;
+  }
+}
+
+
+/* Responsivo */
+@media (max-width: 1024px) {
+  .instagram-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .instagram-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 
 /* Responsivo */
 @media(max-width: 1024px){

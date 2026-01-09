@@ -37,21 +37,38 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* =========================
-     CARROSSEL DE AVALIAÇÕES
-  ========================= */
-  const reviewsContainer = document.querySelector('.reviews');
-  if (reviewsContainer) {
-    const reviews = Array.from(reviewsContainer.children);
-    const gap = 30;
-    const itemWidth = reviews[0].offsetWidth + gap;
+   CARROSSEL DE AVALIAÇÕES
+========================= */
+const reviewsContainer = document.querySelector('.reviews');
 
-    reviews.forEach(review => {
-      reviewsContainer.appendChild(review.cloneNode(true));
-    });
+if (reviewsContainer) {
+  const reviews = Array.from(reviewsContainer.children);
+  const gap = 30;
+  let index = 0;
+  let itemWidth;
+  let interval;
 
-    let index = 0;
+  // Duplica os cards (loop infinito)
+  reviews.forEach(review => {
+    reviewsContainer.appendChild(review.cloneNode(true));
+  });
 
-    setInterval(() => {
+  function calculateItemWidth() {
+    const isMobile = window.innerWidth <= 768;
+
+    if (isMobile) {
+      // Mobile: 1 card por tela (sem gap)
+      itemWidth = reviewsContainer.parentElement.offsetWidth;
+    } else {
+      // Desktop: mantém exatamente seu comportamento atual
+      itemWidth = reviews[0].offsetWidth + gap;
+    }
+  }
+
+  function startCarousel() {
+    clearInterval(interval);
+
+    interval = setInterval(() => {
       index++;
       reviewsContainer.style.transition = 'transform 0.8s ease';
       reviewsContainer.style.transform = `translateX(-${index * itemWidth}px)`;
@@ -65,6 +82,21 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }, 2500);
   }
+
+  // Inicialização segura
+  window.addEventListener('load', () => {
+    calculateItemWidth();
+    startCarousel();
+  });
+
+  // Recalcula ao mudar tamanho/orientação
+  window.addEventListener('resize', () => {
+    calculateItemWidth();
+    reviewsContainer.style.transition = 'none';
+    reviewsContainer.style.transform = `translateX(-${index * itemWidth}px)`;
+  });
+}
+
 
   /* =========================
      MENU ATIVO POR SEÇÃO (CORRETO)
